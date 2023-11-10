@@ -1,29 +1,17 @@
 #include <stdio.h>
 #include <math.h>
-
 int main() {
-    // Введення значень змінних
-    double alpha, beta;
+    // Введення значень x та y
+    double x, y;
 
-    printf("Введіть значення alpha в радіанах: ");
-    scanf("%lf", &alpha);
+    printf("Введіть значення x та y: ");
+    scanf("%lf %lf", &x, &y);
 
-    printf("Введіть значення beta в радіанах: ");
-    scanf("%lf", &beta);
+    // Обчислення виразу
+    double result = sqrt(x+2)/sqrt(y-1);
 
-    // Обчислення виразу z1
-    double z1_numerator = sin(alpha) + cos(2 * beta - alpha);
-    double z1_denominator = cos(alpha) - sin(2 * beta - alpha);
-    double z1 = z1_numerator / z1_denominator;
-
-    // Обчислення виразу z2
-    double z2_numerator = 1 + pow(sin(beta), 2);
-    double z2_denominator = pow(cos(beta), 2);
-    double z2 = z2_numerator / z2_denominator;
-
-    // Виведення результатів
-    printf("z1 = %lf\n", z1);
-    printf("z2 = %lf\n", z2);
+    // Виведення результату
+    printf("Результат виразу: %lf\n", result);
 
     return 0;
 }
