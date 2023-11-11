@@ -1,30 +1,34 @@
 #include <stdio.h>
+#include <limits.h>
 
 int main() {
-    char a, b;
+    const int size = 50;
+    int numbers[size];
+    
+    // Введення 50 чисел
+    for (int i = 0; i < size; ++i) {
+        numbers[i]=i+1;
+    }
 
-    // Введення значення змінних a і b
-    printf("Введіть значення змінної a: ");
-    scanf(" %c", &a);  // Пробіл перед %c для ігнорування пробілів, табуляцій та переведень рядка
+    // Знаходження мінімального числа
+    int min = INT_MAX;
+    for (int i = 0; i < size; ++i) {
+        if (numbers[i] < min) {
+            min = numbers[i];
+        }
+    }
 
-    printf("Введіть значення змінної b: ");
-    scanf(" %c", &b);
-
-    // Оголошення та ініціалізація покажчиків
-    char *ptr_a = &a;
-    char *ptr_b = &b;
-
-    // Зміна значення змінної a за допомогою покажчика
-    *ptr_a = 'X';
-
-    // Обмін значеннями a і b за допомогою покажчиків
-    char temp = *ptr_a;
-    *ptr_a = *ptr_b;
-    *ptr_b = temp;
+    // Підрахунок кількості чисел, відмінних від мінімального
+    int count = 0;
+    for (int i = 0; i < size; ++i) {
+        if (numbers[i] != min) {
+            count++;
+        }
+    }
 
     // Виведення результату
-    printf("Значення змінної a після зміни: %c\n", a);
-    printf("Значення змінної b після зміни: %c\n", b);
+    printf("Мінімальне число: %d\n", min);
+    printf("Кількість чисел, відмінних від мінімального: %d\n", count);
 
     return 0;
 }
