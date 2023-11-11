@@ -1,34 +1,34 @@
 #include <stdio.h>
-#include <limits.h>
+#include <ctype.h>
 
 int main() {
-    const int size = 50;
-    int numbers[size];
-    
-    // Введення 50 чисел
-    for (int i = 0; i < size; ++i) {
-        numbers[i]=i+1;
-    }
+    char text[1000];
+    printf("Введіть текст: ");
+    fgets(text, sizeof(text), stdin);
 
-    // Знаходження мінімального числа
-    int min = INT_MAX;
-    for (int i = 0; i < size; ++i) {
-        if (numbers[i] < min) {
-            min = numbers[i];
+    int countA = 0, countO = 0;
+
+    for (int i = 0; text[i] != '\0'; ++i) {
+        char currentChar = tolower(text[i]); // перетворення на нижній регістр для порівняння
+
+        if (currentChar == 'а') {
+            countA++;
+        } else if (currentChar == 'о') {
+            countO++;
         }
     }
 
-    // Підрахунок кількості чисел, відмінних від мінімального
-    int count = 0;
-    for (int i = 0; i < size; ++i) {
-        if (numbers[i] != min) {
-            count++;
+    if (countA > 0 && countO > 0) {
+        if (countA > countO) {
+            printf("Символ 'а' зустрічається частіше (%d разів)\n", countA);
+        } else if (countO > countA) {
+            printf("Символ 'о' зустрічається частіше (%d разів)\n", countO);
+        } else {
+            printf("Символи 'а' та 'о' зустрічаються однакову кількість разів (%d разів)\n", countA);
         }
+    } else {
+        printf("Один із символів ('а' або 'о') відсутній у тексті.\n");
     }
-
-    // Виведення результату
-    printf("Мінімальне число: %d\n", min);
-    printf("Кількість чисел, відмінних від мінімального: %d\n", count);
 
     return 0;
 }

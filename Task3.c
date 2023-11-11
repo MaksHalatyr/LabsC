@@ -1,44 +1,56 @@
 #include <stdio.h>
+#include <string.h>
 
 int main() {
-    int p; // кількість елементів у послідовності
-    double x; // число, яке слід вставити
-    printf("Введіть кількість елементів у послідовності p: ");
-    scanf("%d", &p);
+    char donor[100], sequence[1000];
 
-    // перевірка на невірний ввід (наприклад, p <= 0)
-    if (p <= 0) {
-        printf("Невірний ввід для кількості елементів у послідовності.\n");
-        return 1; // вихід з програми з помилкою
-    }
+    // Введення слова-донора та послідовності слів
+    printf("Введіть слово-донора: ");
+    scanf("%s", donor);
+    printf("Введіть послідовність слів: ");
+    getchar(); // очистка буфера
+    fgets(sequence, sizeof(sequence), stdin);
 
-    double sequence[p];
+    // Розділення рядка на слова
+    char *word = strtok(sequence, " ");
+    printf("Слова, які можна скласти з слова-донора:\n");
 
-    // Введення елементів послідовності
-    printf("Введіть %d чисел в послідовності (в порядку зростання):\n", p);
-    for (int i = 0; i < p; ++i) {
-        scanf("%lf", &sequence[i]);
-    }
-
-    // Введення числа, яке слід вставити
-    printf("Введіть число, яке слід вставити: ");
-    scanf("%lf", &x);
-
-    // Знаходження відповідних індексів
-    int index1 = -1, index2 = -1;
-    for (int i = 0; i < p - 1; ++i) {
-        if (sequence[i] <= x && x <= sequence[i + 1]) {
-            index1 = i;
-            index2 = i + 1;
-            break; // зупиняємо цикл, якщо знайдено відповідні індекси
+    while (word != NULL) {
+        // Видалення символу нового рядка (якщо він присутній)
+        char *newline = strchr(word, '\n');
+        if (newline != NULL) {
+            *newline = '\0';
         }
-    }
 
-    // Виведення результату
-    if (index1 != -1 && index2 != -1) {
-        printf("Число %.2lf слід вставити між елементами з індексами %d та %d.\n", x, index1, index2);
-    } else {
-        printf("Неможливо вставити число у послідовність так, щоб не порушити її неспадання.\n");
+        // Перевірка можливості складання слова
+        int donorFreq[26] = {0};
+        int wordFreq[26] = {0};
+
+        // Заповнення масиву donorFreq
+        for (int i = 0; i < strlen(donor); i++) {
+            donorFreq[donor[i] - 'A']++;
+        }
+
+        // Заповнення масиву wordFreq
+        for (int i = 0; i < strlen(word); i++) {
+            wordFreq[word[i] - 'A']++;
+        }
+
+        // Перевірка, чи можна скласти слово
+        int canConstruct = 1;
+        for (int i = 0; i < 26; i++) {
+            if (wordFreq[i] > donorFreq[i]) {
+                canConstruct = 0; // слово неможливо скласти
+                break;
+            }
+        }
+
+        if (canConstruct) {
+            printf("%s\n", word);
+        }
+
+        // Отримання наступного слова
+        word = strtok(NULL, " ");
     }
 
     return 0;
