@@ -2,24 +2,26 @@
 #include <math.h>
 
 int main() {
-    int n;
+    double circumference; // Довжина кола
+    double *radius_ptr;    // Покажчик на радіус кола
+    double radius;         // Змінна для збереження значення радіуса
 
-    // Введення натурального числа n
-    printf("Введіть натуральне число n: ");
-    scanf("%d", &n);
+    // Введення довжини кола
+    printf("Введіть довжину кола: ");
+    scanf("%lf", &circumference);
 
-    double sum = 0.0;
-    double a;
+    // Розрахунок радіуса кола
+    radius = circumference / (2 * M_PI);
+    
+    // Ініціалізація покажчика на радіус
+    radius_ptr = &radius;
 
-    // Введення дійсних чисел a₁, a₂, ..., aₙ та обчислення суми
-    for (int i = 1; i <= n; ++i) {
-        printf("Введіть число a%d: ", i);
-        scanf("%lf", &a);
-        sum += fabs(a);
-    }
+    // Розрахунок площі круга
+    double area = M_PI * (*radius_ptr) * (*radius_ptr);
 
     // Виведення результату
-    printf("Сума чисел: %lf\n", sum);
+    printf("Радіус кола: %lf\n", *radius_ptr);
+    printf("Площа круга: %lf\n", area);
 
     return 0;
 }
