@@ -1,28 +1,26 @@
 #include <stdio.h>
-int main()
-{
-    // Введення значень a, b, c та x
-    double a, b, c, x, result;
 
-    printf("Введіть значення a, b, c, x: ");
-    scanf("%lf %lf %lf %lf", &a, &b, &c, &x);
+int main() {
+    int n;
 
-    if (x < 0 && b != 0)
-    {
-        result = a * x * x + b;
+    // Введення n
+    printf("Введіть n (n > 2): ");
+    scanf("%d", &n);
+
+    if (n <= 2) {
+        printf("Введіть коректне значення n (n > 2)\n");
+        return 1; // Вихід з програми з помилкою
     }
-    else if (x > 0 && b == 0)
-    {
-        result = (x - a) / (x - c);
+
+    int x[n]; // Масив для збереження значень x₀, x₁, ..., xₙ
+    x[0] = x[1] = x[2] = 2; // Початкові значення
+
+    for (int i = 3; i <= n; ++i) {
+        x[i] = x[i - 1] + 4 / x[i - 3];
     }
-    else
-    {
-        result = x / c;
-    }
-    // Обчислення значення функції F(x)
 
     // Виведення результату
-    printf("F(x) = %lf\n", result);
+    printf("%d-й член послідовності: %d\n", n, x[n]);
 
     return 0;
 }

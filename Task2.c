@@ -1,17 +1,25 @@
 #include <stdio.h>
 #include <math.h>
+
 int main() {
-    // Введення значень x та y
-    double x, y;
+    int n;
 
-    printf("Введіть значення x та y: ");
-    scanf("%lf %lf", &x, &y);
+    // Введення натурального числа n
+    printf("Введіть натуральне число n: ");
+    scanf("%d", &n);
 
-    // Обчислення виразу
-    double result = sqrt(x+2)/sqrt(y-1);
+    double sum = 0.0;
+    double a;
+
+    // Введення дійсних чисел a₁, a₂, ..., aₙ та обчислення суми
+    for (int i = 1; i <= n; ++i) {
+        printf("Введіть число a%d: ", i);
+        scanf("%lf", &a);
+        sum += fabs(a);
+    }
 
     // Виведення результату
-    printf("Результат виразу: %lf\n", result);
+    printf("Сума чисел: %lf\n", sum);
 
     return 0;
 }

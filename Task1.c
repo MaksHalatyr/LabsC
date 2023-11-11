@@ -1,25 +1,23 @@
 #include <stdio.h>
+#include <math.h>
 
 int main() {
-    // Введення трьох чисел
-    double X, Y, Z;
+    int n;
 
-    printf("Введіть три дійсних числа (X Y Z): ");
-    scanf("%lf %lf %lf", &X, &Y, &Z);
+    // Введення цілого n
+    printf("Введіть ціле n: ");
+    scanf("%d", &n);
 
-    // Знаходження максимального числа
-    double max;
+    double result = 0.0;
+    double partialSum = 0.0;
 
-    if (X >= Y && X >= Z) {
-        max = X;
-    } else if (Y >= X && Y >= Z) {
-        max = Y;
-    } else {
-        max = Z;
+    for (int i = n; i >= 1; --i) {
+        partialSum += sin(i);
+        result += 1.0 / partialSum;
     }
 
     // Виведення результату
-    printf("Максимальне число: %lf\n", max);
+    printf("Результат виразу: %lf\n", result);
 
     return 0;
 }
